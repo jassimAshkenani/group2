@@ -70,6 +70,45 @@ app.post('/login', async (req,res) => {
     res.redirect('/login')
 })
 
+app.get('/register', (req, res) => {
+    let message = req.query.message
+    res.render('register', { message, layout: undefined });
+});
+
+
+
+app.post('/register', async (req, res) => {
+    let name = req.body.name
+    let phone = req.body.phone
+    let degree = req.body.degree
+    let email = req.body.email
+    let username = req.body.username
+    let password = req.body.password
+    let repeatPassword = req.body.repeatPassword
+    let type= req.body.type
+    if (password != repeatPassword || !username || !password || !phone || !name || !degree || !email){
+        res.redirect('/register?message=Incorrect or missing information')
+        return
+    }
+    let otp = Math.floor(1000 + Math.random() * 9000);
+    let newUser = {
+        name,
+        phone,
+        degree,
+        email,
+        username,
+        password,
+        type,
+        verified:false,
+        otp
+    }
+    console.log(otp)
+
+    await business.saveNewUser(newUser)
+
+    res.redirect(`/verify-email/${username}`)
+
+})
 
 app.get('/logout', async (req, res) => {
     await business.deleteSession(req.cookies.session)
