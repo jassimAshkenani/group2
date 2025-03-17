@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendors styles-->
+    <link rel="stylesheet" href="vendors/simplebar/css/simplebar.css">
+    <link rel="stylesheet" href="css/vendors/simplebar.css">
+    <!-- Main styles for this application-->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- We use those styles to show code examples, you should remove them in your application.-->
+    <link href="css/examples.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        #header-container {
+        background: linear-gradient(45deg, rgb(50, 31, 219), rgb(46, 184, 92), rgb(229, 83, 83), rgb(249, 177, 21), rgb(51, 153, 255));
+        background-size: 800% 800%;
+        animation: gradientBG 15s ease infinite;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+        height: 120px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        }
+
+        #header-container h1 {
+        margin: auto;
+        font-size: 2.3em;
+        letter-spacing: 0.5px;
+        }
+
+        #header-container p {
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #fff;
+        }
+
+        section {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .record-request-form {
+            max-width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        form input,
+        form select {
+            width: calc(100% - 16px);
+            padding: 8px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .fuel-box {
+            background-color:white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: auto;
+            width: 48%; /* Adjusted width for better alignment */
+        }
+
+        .fuel-header {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+</head>
+<body>
+<div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
+  <div class="sidebar-brand d-none d-md-flex"></div>
+    <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
+      <li class="nav-item"><a class="nav-link" href="/student">
+        <svg class="nav-icon">
+          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-home"></use>
+        </svg> Home</a>
+      </li>
+      <li class="nav-item"><a class="nav-link" href="/logout">
+        <svg class="nav-icon">
+          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-arrow-circle-right"></use>
+        </svg> Logout</a>
+      </li>
+    </ul>    
+</div>
+
+<div class="wrapper d-flex flex-column min-vh-100 bg-light">
+  <header class="header header-sticky mb-4">
+    <div class="container-fluid">
+      <button class="header-toggler px-md-0 me-md-3" type="button" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
+        <svg class="icon icon-lg">
+          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-menu"></use>
+        </svg>
+      </button><a class="header-brand d-md-none" href="#">
+        <svg width="118" height="46" alt="CoreUI Logo">
+          <use xlink:href="assets/brand/coreui.svg#full"></use>
+        </svg></a>
+      <ul class="header-nav d-none d-md-flex">
+        <li class="nav-item"><a class="nav-link" href="/student">Dashboard</a></li>
+      </ul>
+      <ul class="header-nav ms-3">
+        <li class="nav-item dropdown"><a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          <div class="avatar avatar-md"><img class="avatar-img" src="assets/img/avatars/2.jpg"></div></a>
+          <div class="dropdown-menu dropdown-menu-end pt-0">
+            <div class="dropdown-header bg-light py-2">
+              <div class="fw-semibold">Settings</div>
+            </div>
+            <a class="dropdown-item" href="/profile">
+              <svg class="icon me-2">
+                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user"></use>
+              </svg> Profile</a>
+            <a class="dropdown-item" href="#">
+              <div class="dropdown-divider"></div><a class="dropdown-item" href="/logout">
+                <svg class="icon me-2">
+                  <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
+              </svg> Logout</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+
+
+<div class="body flex-grow-1 px-3">
+  <div class="container-lg">
+    <div class="page-container">
+      <div id="header-container">
+        <h1>Student Support Portal</h1>
+        <p>Centralized platform for addressing student concerns</p>
+      </div>
+    </div>
+    <section>
+      <div class="record-request-form">
+        <h2>Submit your Request</h2>
+        <form method="post">
+          <label for="date">Select Date</label>
+          <input type="date" id="date" name="Date">
+          
+          <label for="category">Category</label>
+          <input type="text" id="category" name="Category">
+
+          <label for="description">Description
+          <input type="text" id="description" name="description">
+          
+          <button type="submit">Submit Request</button>
+          <button type="reset">Reset</button>
+        </form>
+      </div>
+      
+    </section>
+
+    <div class="card mb-4">
+      <div class="card-header">
+        <h2 style="text-align: center;">Your Previous Requests</h2>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Category</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    
+    <footer class="footer">
+      <div><a href="https://coreui.io">Course Management System</a> © 2025</div>
+      <div class="ms-auto">Powered by&nbsp;<a href="https://coreui.io/docs/">JassimMohammed</a></div>
+    </footer>
+  </div>
+</div>
+</div>
+
+<script src="vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
+<script src="vendors/simplebar/js/simplebar.min.js"></script>
+
+</body>
+</html>
