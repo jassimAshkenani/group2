@@ -57,8 +57,19 @@ async function saveNewUser(newUser){
 
 }
 
+async function checkOTP(username, otp) {
+    await connectDatabase()
+    let result = await users.findOne({username:username})
+    if (result && (result.otp === otp)){
+        await users.updateOne({username:username}, {$set:{verified: true}})
+        return true
+    }
+    return false
+}
+
+
 
 module.exports={
     getUserDetails, saveSession, getSessionData, deleteSession,
-    updateSession, saveNewUser
+    updateSession, saveNewUser, checkOTP
 }

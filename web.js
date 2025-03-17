@@ -110,6 +110,26 @@ app.post('/register', async (req, res) => {
 
 })
 
+app.get("/verify-email/:username", async(req, res) =>{
+    let username = req.params.username
+    res.render('verifyEmail',{
+        username,
+        layout:undefined
+    })
+})
+
+app.post("/verify-email/:username", async(req, res) =>{
+    let otp = Number(req.body.otp)
+    let username = req.params.username
+    let verification = await business.checkOTP(username, otp)
+    if (verification){
+        res.redirect("/login?message=Your account is verified, you can now login")
+    }
+    else{  
+        res.redirect("/login?message=Your account is not verified yet")
+    }
+})
+
 app.get('/logout', async (req, res) => {
     await business.deleteSession(req.cookies.session)
     res.cookie('session', '', {expires: new Date(Date.now())})

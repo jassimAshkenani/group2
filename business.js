@@ -44,6 +44,10 @@ async function saveNewUser(newUser) {
     await persistence.saveNewUser(newUser)
 }
 
+async function checkOTP(username, otp) {
+    return await persistence.checkOTP(username,otp)
+}
+
 module.exports = {
-    validateCredentials, startSession, getSessionData, deleteSession, saveNewUser
+    validateCredentials, startSession, getSessionData, deleteSession, saveNewUser, checkOTP
 }
