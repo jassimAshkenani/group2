@@ -102,7 +102,7 @@ app.post('/register', async (req, res) => {
         verified:false,
         otp
     }
-    console.log(otp)
+    console.log(`Your OTP for registering your account is: ${otp}`)
 
     await business.saveNewUser(newUser)
 
