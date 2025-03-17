@@ -130,6 +130,38 @@ app.post("/verify-email/:username", async(req, res) =>{
     }
 })
 
+app.get('/student', async (req, res)=>{
+    let sessionKey = req.cookies.session
+    if (!sessionKey) {
+        let key = await business.startSession({username:"",userType:""})
+        res.cookie('session', key.uuid, {expires: key.expiry})
+        await flash.setFlash(key.uuid, "Unauthorized Access")
+        res.redirect("/login")
+        return
+    }
+    let sessionData = await business.getSessionData(sessionKey)
+    if (!sessionData) {
+        let key = await business.startSession({username:"",userType:""})
+        res.cookie('session', key.uuid, {expires: key.expiry})
+        await flash.setFlash(key.uuid, "Unauthorized Access")
+        res.redirect("/login")
+        return
+    }
+
+    if (sessionData && sessionData.Data && sessionData.Data.userType && sessionData.Data.userType != 'student') {
+        let key = await business.startSession({username:"",userType:""})
+        res.cookie('session', key.uuid, {expires: key.expiry})
+        await flash.setFlash(key.uuid, "Unauthorized Access")
+        res.redirect("/login")
+        return
+    }
+    let message = await flash.getFlash(sessionKey)
+    res.render('student',{
+        m:message,
+        layout:undefined
+    })
+})
+
 app.get('/logout', async (req, res) => {
     await business.deleteSession(req.cookies.session)
     res.cookie('session', '', {expires: new Date(Date.now())})
