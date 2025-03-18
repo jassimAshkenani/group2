@@ -5,11 +5,11 @@ const nodemailer = require('nodemailer')
 
 let transporter = nodemailer.createTransport({
     host: "127.0.0.1",
-    port:25
+    port: 25
 })
 
-async function testmail(email, code){
-    let body=`
+async function testmail(email, code) {
+    let body = `
     Your One Time Passcode is ${code}. Please enter this code to the link provided below.
     Please click <a href='http://127.0.0.01:8000/verify-email'>Here</a> to verify your email
     `
@@ -17,7 +17,7 @@ async function testmail(email, code){
         from: "emailVerification@udst.edu.qa",
         to: email,
         subject: "Verify email",
-        html:body 
+        html: body
     })
 }
 

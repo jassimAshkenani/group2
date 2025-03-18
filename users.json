@@ -1,0 +1,28 @@
+[
+    {
+        "username": "60100000",
+        "password": 1234,
+        "type": "admin",
+        "phone": "66337733",
+        "name": "Abdulatif",
+        "email": "60100000@udst.edu.qa"
+    },
+    {
+        "username": "60106379",
+        "password": 1234,
+        "type": "student",
+        "phone": "77997788",
+        "name": "Jassim",
+        "degree": "Bachelors in Cyber Security",
+        "email": "60106379@udst.edu.qa"
+    },
+    {
+        "username": "60301301",
+        "password": 1234,
+        "type": "student",
+        "phone": "30303030",
+        "name": "Mohammed",
+        "degree": "Bachelors in Cyber Security",
+        "email": "60301301@udst.edu.qa"
+    }
+    ]
