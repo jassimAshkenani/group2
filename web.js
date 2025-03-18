@@ -4,7 +4,6 @@ const handlebars = require('express-handlebars')
 const cookieParser = require('cookie-parser')
 const business = require('./business')
 const flash = require('./flash.js')
-const fileUpload = require('express-fileupload')
 const verifyEmail = require('./emailVerification.js')
 
 app = express()
@@ -17,7 +16,6 @@ app.use('/vendors', express.static(__dirname+'/vendors'))
 app.use('/assets', express.static(__dirname+'/assets'))
 app.use(urlencodedParser)
 app.use(cookieParser())
-app.use(fileUpload())
 app.use(bodyParser.json())
 
 
@@ -157,6 +155,38 @@ app.get('/student', async (req, res)=>{
     }
     let message = await flash.getFlash(sessionKey)
     res.render('student',{
+        m:message,
+        layout:undefined
+    })
+})
+
+app.get('/admin', async (req, res)=>{
+    let sessionKey = req.cookies.session
+    if (!sessionKey) {
+        let key = await business.startSession({username:"",userType:""})
+        res.cookie('session', key.uuid, {expires: key.expiry})
+        await flash.setFlash(key.uuid, "Unauthorized Access")
+        res.redirect("/login")
+        return
+    }
+    let sessionData = await business.getSessionData(sessionKey)
+    if (!sessionData) {
+        let key = await business.startSession({username:"",userType:""})
+        res.cookie('session', key.uuid, {expires: key.expiry})
+        await flash.setFlash(key.uuid, "Unauthorized Access")
+        res.redirect("/login")
+        return
+    }
+
+    if (sessionData && sessionData.Data && sessionData.Data.userType && sessionData.Data.userType != 'admin') {
+        let key = await business.startSession({username:"",userType:""})
+        res.cookie('session', key.uuid, {expires: key.expiry})
+        await flash.setFlash(key.uuid, "Unauthorized Access")
+        res.redirect("/login")
+        return
+    }
+    let message = await flash.getFlash(sessionKey)
+    res.render('admin',{
         m:message,
         layout:undefined
     })
