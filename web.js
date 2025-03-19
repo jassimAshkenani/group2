@@ -189,7 +189,7 @@ app.get('/student', async (req, res) => {
         return
     }
 
-    if (sessionData && sessionData.Data && sessionData.Data.userType && sessionData.Data.userType != 'student') {
+    if (sessionData.Data.userType !== 'student') {
         let key = await business.startSession({ username: "", userType: "" })
         res.cookie('session', key.uuid, { expires: key.expiry })
         await flash.setFlash(key.uuid, "Unauthorized Access")
@@ -227,7 +227,7 @@ app.get('/admin', async (req, res) => {
         return
     }
 
-    if (sessionData && sessionData.Data && sessionData.Data.userType && sessionData.Data.userType != 'admin') {
+    if (sessionData.Data.userType !== 'admin') {
         let key = await business.startSession({ username: "", userType: "" })
         res.cookie('session', key.uuid, { expires: key.expiry })
         await flash.setFlash(key.uuid, "Unauthorized Access")
